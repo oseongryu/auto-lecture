@@ -27,7 +27,7 @@ def capture_network_calls(url, output_file, whitelist, interval=5):
         nonlocal timer
         if timer:
             timer.cancel()
-        timer = threading.Timer(20, on_timeout)  # 2분(120초) 타이머 설정
+        timer = threading.Timer(80, on_timeout)  # 80초 타이머 설정
         timer.start()
 
     def on_timeout():
@@ -40,6 +40,12 @@ def capture_network_calls(url, output_file, whitelist, interval=5):
                 pyautogui.click(first_button_location)
                 print(f"Clicked on the first button at {first_button_location}.")
                 time.sleep(2)  # 2초 대기
+
+                x, y = pyautogui.center(first_button_location)
+                pyautogui.moveTo(x - 30, y + 30)
+
+                time.sleep(2)  # 2초 대기
+
 
                 # 두 번째 이미지를 클릭
                 second_image_path = "2.png"  # 두 번째 클릭할 이미지 파일 경로
